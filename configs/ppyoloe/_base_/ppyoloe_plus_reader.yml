@@ -15,7 +15,7 @@ TrainReader:
     - NormalizeImage: {mean: [0., 0., 0.], std: [1., 1., 1.], norm_type: none}
     - Permute: {}
     - PadGT: {}
-  batch_size: 8
+  batch_size: 16
   shuffle: true
   drop_last: true
   use_shared_memory: true
@@ -27,7 +27,7 @@ EvalReader:
     - Resize: {target_size: *eval_size, keep_ratio: False, interp: 2}
     - NormalizeImage: {mean: [0., 0., 0.], std: [1., 1., 1.], norm_type: none}
     - Permute: {}
-  batch_size: 2
+  batch_size: 8
 
 TestReader:
   inputs_def:

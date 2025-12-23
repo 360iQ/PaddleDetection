@@ -1,0 +1,15 @@
+_BASE_: [
+  '../datasets/custom_detection_2class.yml',
+  '../runtime.yml',
+  './_base_/optimizer_50e.yml',
+  './_base_/ppyoloe_plus_crn.yml',
+  './_base_/ppyoloe_plus_reader.yml',
+]
+
+log_iter: 100
+snapshot_epoch: 1
+weights: output/ppyoloe_plus_crn_s_50e_custom_2class/best_model
+
+pretrain_weights: trained_models/21.pdparams
+depth_mult: 0.33
+width_mult: 0.50

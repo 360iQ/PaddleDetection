@@ -1,0 +1,13 @@
+_BASE_: [
+  '../datasets/custom_detection.yml',
+  '../runtime.yml',
+  './_base_/optimizer_50e.yml',
+  './_base_/yolox_cspdarknet.yml',
+  './_base_/yolox_reader.yml'
+]
+depth_mult: 1.33
+width_mult: 1.25
+
+log_iter: 100
+snapshot_epoch: 2
+weights: output/yolox_x_50e_coco/model_final

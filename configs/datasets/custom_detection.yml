@@ -1,0 +1,23 @@
+metric: COCO
+num_classes: 1
+
+TrainDataset:
+  name: COCODataSet
+  image_dir: train
+  anno_path: annotations/instances_train.json
+  dataset_dir: ../../input/dataset/custom
+  allow_empty: true
+  empty_ratio: 0.2
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+EvalDataset:
+  name: COCODataSet
+  image_dir: val
+  anno_path: annotations/instances_val.json
+  dataset_dir: ../../input/dataset/custom
+  allow_empty: true
+
+TestDataset:
+  name: ImageFolder
+  anno_path: annotations/instances_val.json
+  dataset_dir: ../../input/dataset/custom
