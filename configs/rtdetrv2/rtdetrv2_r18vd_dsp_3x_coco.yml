@@ -6,7 +6,7 @@ _BASE_: [
   '_base_/rtdetrv2_reader.yml',
 ]
 
-weights: output/rtdetrv2_r18_dsp_3x_coco/best_model
+weights: output/rtdetrv2_r18vd_dsp_3x_coco/best_model
 find_unused_parameters: True
 log_iter: 200
 
