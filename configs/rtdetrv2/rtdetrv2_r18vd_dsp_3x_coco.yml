@@ -26,7 +26,7 @@ RTDETRTransformerv2:
   cross_attn_sampling_method: discrete
 
 
-epoch: 1
+epoch: 36
 
 OptimizerBuilder:
   optimizer:
