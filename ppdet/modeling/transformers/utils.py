@@ -159,8 +159,11 @@ def deformable_attention_core_func_v2(value,
     value = value.transpose([0, 2, 3, 1]).flatten(0, 1)
     split_shape = [h * w for h, w in value_spatial_shapes]
     value_list = value.split(split_shape, axis=-1)
+
+    # Use dynamic shape to handle batch_num=None during export
+    dynamic_batch_heads = paddle.shape(value)[0]
     value_list = [
-        value.reshape([batch_num * num_heads, head_dim, h, w])
+        value.reshape([dynamic_batch_heads, head_dim, h, w])
         for value, (h, w) in zip(value_list, value_spatial_shapes)
     ]
 
@@ -195,7 +198,9 @@ def deformable_attention_core_func_v2(value,
     # sampling_value: [batch_num * num_heads, head_dim, query_len, total_num_points]
     # output: [batch_num * num_heads, head_dim, query_len]
     output = (sampling_value * attn_weights).sum(-1)
-    output = output.reshape([batch_num, num_heads * head_dim, query_len])
+    # Use dynamic shape for reshape to handle batch_num=None during export
+    dynamic_batch = paddle.shape(attention_weights)[0]
+    output = output.reshape([dynamic_batch, num_heads * head_dim, query_len])
     return output.transpose([0, 2, 1])
 
 
