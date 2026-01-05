@@ -1,12 +1,12 @@
 _BASE_: [
-  '../datasets/coco_detection.yml',
+  '../datasets/custom_detection_2class.yml',
   '../runtime.yml',
   '_base_/optimizer_6x.yml',
   '_base_/rtdetrv2_r50vd.yml',
   '_base_/rtdetrv2_reader.yml',
 ]
 
-weights: output/rtdetrv2_r18_dsp_3x_coco/model_final
+weights: output/rtdetrv2_r18_dsp_3x_coco/best_model
 find_unused_parameters: True
 log_iter: 200
 
@@ -26,7 +26,7 @@ RTDETRTransformerv2:
   cross_attn_sampling_method: discrete
 
 
-epoch: 36
+epoch: 1
 
 OptimizerBuilder:
   optimizer:
