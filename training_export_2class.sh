@@ -2,6 +2,7 @@
 
 # Configuration file
 CONFIG_FILE="configs/ppyoloe/ppyoloe_plus_crn_s_50e_custom_2class.yml"
+MODEL_NAME="ppyoloe_plus_crn_s_50e_custom_2class"  # The name of the model is also the folder name under output/model
 
 # Generate a timestamp for logging
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
@@ -17,3 +18,12 @@ python tools/export_model.py -c ${CONFIG_FILE} --output_dir /opt/ml/output/model
 
 # Setting permissions for the output directory
 chmod -R 777 /opt/ml/output/model
+
+#export model to onnx
+pip install paddle2onnx
+
+paddle2onnx --model_dir /opt/ml/output/model/${MODEL_NAME} \
+            --model_filename model.pdmodel \
+            --params_filename model.pdiparams \
+            --opset_version 16 \
+            --save_file /opt/ml/output/model/${MODEL_NAME}/model.onnx 2>&1 | tee /opt/ml/output/model/logs/paddle2onnx_${timestamp}.log
